@@ -50,7 +50,7 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     >>> multiplicative_inverse(7, 40)
     23
     """
-    pass
+    
     phi0 = phi
     y = 0
     x = 1
