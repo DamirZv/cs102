@@ -16,7 +16,6 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     ''
     """ 
     ciphertext = ""
-    # PUT YOUR CODE HERE
     for i in plaintext:
         if ord(i)>=ord('a') and ord(i)<=ord('z'):
             if ord(i)+shift>ord('z'):
@@ -47,7 +46,6 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     ''
     """
     plaintext = ""
-    # PUT YOUR CODE HERE 
     for i in ciphertext:
         if ord(i)>=ord('a') and ord(i)<=ord('z'):
             if ord(i)-shift<ord('a'):
