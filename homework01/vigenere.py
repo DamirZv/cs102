@@ -10,13 +10,28 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     >>> encrypt_vigenere("ATTACKATDAWN", "LEMON")
     'LXFOPVEFRNHR'
     """
-    keyword_length = len(keyword)
-    keyword_as_int = [ord(i) for i in keyword]
-    plaintext_as_int = [ord(i) for i in plaintext]
+    
     ciphertext = ""
-    for i in range(len(plaintext_as_int)):
-             value = (plaintext_as_int[i] + keyword_as_int[i % keyword_length]) % 26
-             ciphertext += chr(value+65)
+    k = 0
+    for i in plaintext:
+        shift = ord(keyword[k % len(keyword)].lower()) - 97
+        k += 1
+        if 64 < ord(i) < 91:
+            x = ord(i) + shift
+            if x > 90:
+                x = 64 + x % 90
+                ciphertext += chr(x)
+            else:
+                ciphertext += chr(x)
+        elif 96 < ord(i) < 123:
+            x = ord(i) + shift % 26
+            if x > 122:
+                x = 97 + x % 123
+                ciphertext += chr(x)
+            else:
+                ciphertext += chr(x)
+        else:
+            ciphertext += i
     return ciphertext
 
 
@@ -31,12 +46,27 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     >>> decrypt_vigenere("LXFOPVEFRNHR", "LEMON")
     'ATTACKATDAWN'
     """
-    keyword_length = len(keyword)
-    keyword_as_int = [ord(i) for i in keyword]
-    ciphertext_as_int = [ord(i) for i in ciphertext]
+
     plaintext = ""
-    for i in range(len(ciphertext_as_int)):
-             value = (ciphertext_as_int[i] - keyword_as_int[i % keyword_length]+26) % 26
-             plaintext += chr(value + 65)
+    k = 0
+    for i in ciphertext:
+        shift = ord(keyword[k % len(keyword)].lower()) - 97
+        k += 1
+        if 64 < ord(i) < 91:
+            x = ord(i) - shift
+            if x < 65:
+                x = 90 + (x - 64)
+                plaintext += chr(x)
+            else:
+                plaintext += chr(x)
+        elif 96 < ord(i) < 123:
+            x = ord(i) - (shift % 26)
+            if x < 97:
+                x = 122 + (x - 96)
+                plaintext += chr(x)
+            else:
+                plaintext += chr(x)
+        else:
+            plaintext += i
     return plaintext
 
