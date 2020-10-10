@@ -39,7 +39,6 @@ def gcd(a: int, b: int) -> int:
             b %= a
     gcd = a + b
     print (gcd)
-    pass
 
 
 def multiplicative_inverse(e: int, phi: int) -> int:
@@ -50,7 +49,7 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     >>> multiplicative_inverse(7, 40)
     23
     """
-    
+
     phi0 = phi
     y = 0
     x = 1
