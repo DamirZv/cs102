@@ -17,18 +17,18 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     """ 
     ciphertext = ""
     for i in plaintext:
-        if ord(i)>=ord('a') and ord(i)<=ord('z'):
-            if ord(i)+shift>ord('z'):
-                 ciphertext=ciphertext+chr((ord(i)+shift)-26)
+        if ord(i) >= ord('a') and ord(i) <= ord('z'):
+            if ord(i) + shift > ord('z'):
+                 ciphertext = ciphertext + chr((ord(i) + shift) - 26)
             else: 
-                ciphertext=ciphertext+chr(ord(i)+shift)
-        elif ord(i)>=ord('A') and ord(i)<=ord('Z'):
-                        if ord(i)+shift>ord('Z'):
-                            ciphertext=ciphertext+chr((ord(i)+shift)-26)
+                ciphertext = ciphertext + chr(ord(i) + shift)
+        elif ord(i) >= ord('A') and ord(i) <= ord('Z'):
+                        if ord(i) + shift > ord('Z'):
+                            ciphertext = ciphertext + chr((ord(i) + shift) - 26)
                         else:
-                                ciphertext=ciphertext+chr(ord(i)+shift)
+                                ciphertext = ciphertext + chr(ord(i) + shift)
         else:
-                                    ciphertext=ciphertext+i
+                                    ciphertext = ciphertext + i
     return ciphertext
 
 
@@ -47,18 +47,18 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     """
     plaintext = ""
     for i in ciphertext:
-        if ord(i)>=ord('a') and ord(i)<=ord('z'):
-            if ord(i)-shift<ord('a'):
-                plaintext=plaintext+chr((ord(i)-shift)+26)
+        if ord(i) >= ord('a') and ord(i) <= ord('z'):
+            if ord(i) - shift < ord('a'):
+                plaintext = plaintext + chr((ord(i) - shift) + 26)
             else:
-                plaintext=plaintext+chr(ord(i)-shift)
-        elif ord(i)>=ord('A') and ord(i)<=ord('Z'):
-                        if ord(i)-shift<ord('A'):
-                            plaintext=plaintext+chr((ord(i)-shift)+26)
+                plaintext = plaintext + chr(ord(i) - shift)
+        elif ord(i) >= ord('A') and ord(i) <= ord('Z'):
+                        if ord(i) - shift < ord('A'):
+                            plaintext = plaintext + chr((ord(i) - shift) + 26)
                         else:
-                                plaintext=plaintext+chr(ord(i)-shift)
+                                plaintext = plaintext + chr(ord(i) - shift)
         else:
-                                    plaintext=plaintext+i
+                                    plaintext = plaintext + i
     return plaintext
 
 
