@@ -17,7 +17,7 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
         shift = ord(keyword[k % len(keyword)].lower()) - 97
         k += 1
         if 64 < ord(i) < 91:
-            x = ord(i) + shift
+            x = ord(i) + shift % 26
             if x > 90:
                 x = 64 + x % 90
                 ciphertext += chr(x)
@@ -53,7 +53,7 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
         shift = ord(keyword[k % len(keyword)].lower()) - 97
         k += 1
         if 64 < ord(i) < 91:
-            x = ord(i) - shift
+            x = ord(i) - (shift % 26)
             if x < 65:
                 x = 90 + (x - 64)
                 plaintext += chr(x)
