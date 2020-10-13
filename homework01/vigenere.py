@@ -13,19 +13,19 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     ciphertext = ""
     k = 0
     for i in plaintext:
-        shift = ord(keyword[k % len(keyword)].lower()) - 97
+        shift = ord(keyword[k % len(keyword)].lower()) - ord("a")
         k += 1
-        if 64 < ord(i) < 91:
+        if ord("@") < ord(i) < ord("["):
             x = ord(i) + shift % 26
-            if x > 90:
-                x = 64 + x % 90
+            if x > ord("Z"):
+                x = ord("@") + x % ord("Z")
                 ciphertext += chr(x)
             else:
                 ciphertext += chr(x)
-        elif 96 < ord(i) < 123:
+        elif ord("`") < ord(i) < ord("{"):
             x = ord(i) + shift % 26
-            if x > 122:
-                x = 97 + x % 123
+            if x > ord("z"):
+                x = ord("a") + x % ord("{")
                 ciphertext += chr(x)
             else:
                 ciphertext += chr(x)
@@ -49,19 +49,19 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     plaintext = ""
     k = 0
     for i in ciphertext:
-        shift = ord(keyword[k % len(keyword)].lower()) - 97
+        shift = ord(keyword[k % len(keyword)].lower()) - ord("a")
         k += 1
-        if 64 < ord(i) < 91:
+        if ord("@") < ord(i) < ord("["):
             x = ord(i) - (shift % 26)
-            if x < 65:
-                x = 90 + (x - 64)
+            if x < ord("A"):
+                x = ord("Z") + (x - ord("@"))
                 plaintext += chr(x)
             else:
                 plaintext += chr(x)
-        elif 96 < ord(i) < 123:
+        elif ord("`") < ord(i) < ord("{"):
             x = ord(i) - (shift % 26)
-            if x < 97:
-                x = 122 + (x - 96)
+            if x < ord("a"):
+                x = ord("z") + (x - ord("`"))
                 plaintext += chr(x)
             else:
                 plaintext += chr(x)
