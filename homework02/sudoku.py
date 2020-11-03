@@ -195,7 +195,7 @@ def generate_sudoku(N: int) -> List[List[str]]:
             if grid[row][col] != ".":
                 grid[row][col] = "."
                 N -= 1
-    return grid # type: ignore
+    return grid  # type: ignore
 
 
 if __name__ == "__main__":
