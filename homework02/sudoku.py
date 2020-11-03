@@ -195,10 +195,7 @@ def generate_sudoku(N: int) -> List[List[str]]:
             if grid[row][col] != ".":
                 grid[row][col] = "."
                 N -= 1
-    if grid is not None:
-        return grid
-    else:
-        return []
+    return grid # type: ignore
 
 
 if __name__ == "__main__":
