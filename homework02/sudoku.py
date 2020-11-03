@@ -17,7 +17,6 @@ def display(grid: List[List[str]]) -> None:
         print(
             "".join(
                 grid[row][col].center(width) + ("|" if str(col) in "25" else "") for col in range(9)
-
             )
         )
         if str(row) in "25":
