@@ -11,12 +11,11 @@ Grid = List[Cells]
 
 
 class GameOfLife:
-    
     def __init__(
         self,
         size: Tuple[int, int],
-        randomize: bool=True,
-        max_generations: Optional[float]=float('inf')
+        randomize: bool = True,
+        max_generations: Optional[float] = float("inf"),
     ) -> None:
         # Размер клеточного поля
         self.rows, self.cols = size
@@ -29,7 +28,7 @@ class GameOfLife:
         # Текущее число поколений
         self.generations = 1
 
-    def create_grid(self, randomize: bool=False) -> Grid:
+    def create_grid(self, randomize: bool = False) -> Grid:
         # Copy from previous assignment
         grid = []
         if randomize == False:
@@ -55,7 +54,9 @@ class GameOfLife:
             for j in range(self.cols):
                 if (self.curr_generation[i][j] == 0) and sum(self.get_neighbours((i, j))) == 3:
                     new_grid[i][j] = 1
-                elif (self.curr_generation[i][j] == 1) and (sum(self.get_neighbours(i, j)) < 2 or sum(self.get_neighbours(i, j)) > 3):
+                elif (self.curr_generation[i][j] == 1) and (
+                    sum(self.get_neighbours(i, j)) < 2 or sum(self.get_neighbours(i, j)) > 3
+                ):
                     new_grid[i][j] = 0
 
         return new_grid
@@ -67,7 +68,6 @@ class GameOfLife:
         self.prev_generation = copy.deepcopy(self.curr_generation)
         self.curr_generation = self.get_next_generation()
         self.generations += 1
-        
 
     @property
     def is_max_generations_exceeded(self) -> bool:
@@ -90,7 +90,7 @@ class GameOfLife:
             return False
 
     @staticmethod
-    def from_file(filename: pathlib.Path) -> 'GameOfLife':
+    def from_file(filename: pathlib.Path) -> "GameOfLife":
         """
         Прочитать состояние клеток из указанного файла.
         """
