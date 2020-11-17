@@ -3,6 +3,7 @@ import random
 
 from pygame.locals import *
 from typing import List, Tuple
+import copy
 
 
 Cell = Tuple[int, int]
@@ -46,18 +47,19 @@ class GameOfLife:
         self.screen.fill(pygame.Color('white'))
 
         # Создание списка клеток
-        # PUT YOUR CODE HERE
+        self.Grid = self.create_grid
 
         running = True
         while running:
             for event in pygame.event.get():
-                if event.type == QUIT:
+                if event.type == pygame.QUIT:
                     running = False
             self.draw_lines()
 
             # Отрисовка списка клеток
             # Выполнение одного шага игры (обновление состояния ячеек)
-            # PUT YOUR CODE HERE
+            self.draw_grid()
+            self.grid = self.get_next_generation
 
             pygame.display.flip()
             clock.tick(self.speed)
@@ -81,17 +83,30 @@ class GameOfLife:
         out : Grid
             Матрица клеток размером `cell_height` х `cell_width`.
         """
-        pass
+        grid = []
+        if randomize == False:
+            grid = [[0 for j in range(self.cell_width)] for i in range(self.cell_height)]
+        else:
+            grid = [[random.randint(0, 1) for j in range(self.cell_width)] for i in range(self.cell_height)]
+        return grid
 
     def draw_grid(self) -> None:
         """
         Отрисовка списка клеток с закрашиванием их в соответствующе цвета.
         """
-        pass
+        for i in range(self.cell_height):
+            for j in range(self.cell_width):
+                if self.Grid[i][j] == 1:
+                    color = pygame.Color("green")
+                else:
+                    color = pygame.Color("white")
+                pygame.draw.rect(self.screen, color, i * self.cell_size + 1, j * self.cell_size + 1, self.cell_size - 1, self.cell_size - 1)
+                
+                
 
     def get_neighbours(self, cell: Cell) -> Cells:
         """
-        Вернуть список соседних клеток для клетки `cell`.
+        Вернуть список соседних клеток для клетки `cell`
 
         Соседними считаются клетки по горизонтали, вертикали и диагоналям,
         то есть, во всех направлениях.
@@ -107,7 +122,13 @@ class GameOfLife:
         out : Cells
             Список соседних клеток.
         """
-        pass
+        x, y = cell
+        neighbours = []
+        for i in range(-1, 2):
+            for j in range(-1, 2):
+                if (0 <= x + i < self.cell_height and 0 <= y + j < self.cell_width and (i, j) != (0, 0)):
+                    neighbours.append(self.grid[x + i][y + j])
+        return neighbours
 
     def get_next_generation(self) -> Grid:
         """
@@ -118,4 +139,12 @@ class GameOfLife:
         out : Grid
             Новое поколение клеток.
         """
-        pass
+        new_grid = copy.deepcopy(self.grid)
+        for i in range(self.cell_height):
+            for j in range(self.cell_width):
+                if (self.grid[i][j] == 0) and sum(self.get_neighbours((i, j))) == 3:
+                    new_grid[i][j] = 1
+                elif (self.grid[i][j] == 1) and (sum(self.get_neighbours(i, j)) < 2 or sum(self.get_neighbours(i, j)) > 3):
+                    new_grid[i][j] = 0
+
+        return new_grid
