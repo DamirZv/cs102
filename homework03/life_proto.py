@@ -2,13 +2,13 @@ import pygame
 import random
 
 from pygame.locals import *
-from typing import List, Tuple
-import copy
+from copy import deepcopy
+import typing as tp
 
 
-Cell = Tuple[int, int]
-Cells = List[int]
-Grid = List[Cells]
+Cell = tp.Tuple[int, int]
+Cells = tp.List[int]
+Grid = tp.List[Cells]
 
 
 class GameOfLife:
