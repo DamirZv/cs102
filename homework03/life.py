@@ -1,21 +1,22 @@
 import pathlib
 import random
 
-from typing import List, Optional, Tuple
-import copy
+import typing as tp
+from copy import deepcopy
 
 
-Cell = Tuple[int, int]
-Cells = List[int]
-Grid = List[Cells]
+Cell = tp.Tuple[int, int]
+Cells = tp.List[int]
+Grid = tp.List[Cells]
 
 
 class GameOfLife:
+    
     def __init__(
         self,
-        size: Tuple[int, int],
+        size: tp.Tuple[int, int],
         randomize: bool = True,
-        max_generations: Optional[float] = float("inf"),
+        max_generations: tp.Optional[float] = float("inf"),
     ) -> None:
         # Размер клеточного поля
         self.rows, self.cols = size
@@ -56,7 +57,7 @@ class GameOfLife:
                     new_grid[i][j] = 1
                 elif (self.curr_generation[i][j] == 1) and (
                     sum(self.get_neighbours(i, j)) < 2 or sum(self.get_neighbours(i, j)) > 3
-                ):
+                    ):
                     new_grid[i][j] = 0
 
         return new_grid
@@ -68,6 +69,7 @@ class GameOfLife:
         self.prev_generation = copy.deepcopy(self.curr_generation)
         self.curr_generation = self.get_next_generation()
         self.generations += 1
+        
 
     @property
     def is_max_generations_exceeded(self) -> bool:
@@ -102,7 +104,7 @@ class GameOfLife:
         game.curr_generation = file_grid
         return game
 
-    def save(filename: pathlib.Path) -> None:
+    def save(self, filename: pathlib.Path) -> None:
         """
         Сохранить текущее состояние клеток в указанный файл.
         """
