@@ -7,7 +7,7 @@ from unittest.mock import MagicMock
 
 import life_proto
 
-
+life_proto.pygame.display = MagicMock()
 
 
 
