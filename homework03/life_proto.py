@@ -2,7 +2,7 @@ import pygame
 import random
 
 from pygame.locals import *
-from copy import deepcopy
+import copy
 import typing as tp
 
 
@@ -46,7 +46,7 @@ class GameOfLife:
         self.screen.fill(pygame.Color("white"))
 
         # Создание списка клеток
-        self.Grid = self.create_grid
+        self.Grid = self.create_grid(True)
 
         running = True
         while running:
@@ -58,7 +58,7 @@ class GameOfLife:
             # Отрисовка списка клеток
             # Выполнение одного шага игры (обновление состояния ячеек)
             self.draw_grid()
-            self.grid = self.get_next_generation
+            self.grid = self.get_next_generation()
 
             pygame.display.flip()
             clock.tick(self.speed)
@@ -96,19 +96,22 @@ class GameOfLife:
         """
         Отрисовка списка клеток с закрашиванием их в соответствующе цвета.
         """
+        lenght = self.cell_size - 1
         for i in range(self.cell_height):
             for j in range(self.cell_width):
-                if self.Grid[i][j] == 1:
+                if self.grid[i][j] == 1:
                     color = pygame.Color("green")
                 else:
                     color = pygame.Color("white")
                 pygame.draw.rect(
                     self.screen,
                     color,
-                    i * self.cell_size + 1,
-                    j * self.cell_size + 1,
-                    self.cell_size - 1,
-                    self.cell_size - 1,
+                    (
+                        i * self.cell_size + 1,
+                        j * self.cell_size + 1,
+                        self.cell_size - 1,
+                        self.cell_size - 1,
+                    ),
                 )
 
     def get_neighbours(self, cell: Cell) -> Cells:
@@ -150,14 +153,12 @@ class GameOfLife:
         out : Grid
             Новое поколение клеток.
         """
-        new_grid = copy.deepcopy(self.grid)
+        new_grid = self.create_grid(False)
         for i in range(self.cell_height):
             for j in range(self.cell_width):
                 if (self.grid[i][j] == 0) and sum(self.get_neighbours((i, j))) == 3:
                     new_grid[i][j] = 1
-                elif (self.grid[i][j] == 1) and (
-                    sum(self.get_neighbours(i, j)) < 2 or sum(self.get_neighbours(i, j)) > 3
-                ):
-                    new_grid[i][j] = 0
+                elif (self.grid[i][j] == 1) and (1 < sum(self.get_neighbours((i, j))) < 4):
+                    new_grid[i][j] = 1
 
         return new_grid

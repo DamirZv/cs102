@@ -8,6 +8,11 @@ from ui import UI
 class GUI(UI):
     def __init__(self, life: GameOfLife, cell_size: int = 10, speed: int = 10) -> None:
         super().__init__(life)
+        self.cell_size = cell_size
+        self.speed = speed
+        self.screen = pygame.display.set_mode(
+            (self.life.cols * self.cell_size, self.life.rows * self.cell_size)
+        )
 
     def draw_lines(self) -> None:
         # Copy from previous assignment
@@ -75,3 +80,9 @@ class GUI(UI):
                 pygame.display.flip()
                 clock.tick(self.speed)
         pygame.quit()
+
+
+if __name__ == "__main__":
+    life = GameOfLife((20, 20), max_generations=500)
+    gui = GUI(life)
+    gui.run()
