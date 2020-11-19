@@ -2,12 +2,12 @@ import unittest
 import random
 import json
 import os
-from unittest.mock import MagicMock
+
 
 
 import life_proto
 
-life_proto.pygame.display = MagicMock()
+
 
 
 
