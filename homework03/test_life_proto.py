@@ -5,7 +5,7 @@ import os
 
 
 
-from life_proto import GameOfLife
+from .life_proto import GameOfLife
 
 
 
