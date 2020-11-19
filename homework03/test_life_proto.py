@@ -117,5 +117,8 @@ class TestGameOfLife(unittest.TestCase):
                 self.assertEqual(steps[step], game.grid)
 
 
-
+loader = unittest.TestLoader()
+suite = loader.loadTestsFromTestCase(TestGameOfLife)
+runner = unittest.TextTestRunner(verbosity=2)
+result = runner.run(suite)
 
