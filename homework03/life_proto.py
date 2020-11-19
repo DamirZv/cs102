@@ -161,3 +161,8 @@ class GameOfLife:
                     new_grid[i][j] = 1
 
         return new_grid
+
+
+if __name__ == "__main__":
+    game = GameOfLife(320, 240, 20)
+    game.run()
