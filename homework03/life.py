@@ -1,9 +1,8 @@
+import copy
 import pathlib
 import random
-
-from typing import List, Optional, Tuple
-import copy
 from copy import deepcopy
+from typing import List, Optional, Tuple
 
 Cell = Tuple[int, int]
 Cells = List[int]
