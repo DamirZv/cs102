@@ -140,8 +140,6 @@ class TestGameOfLife(unittest.TestCase):
         self.assertFalse(game.is_changing)
 
 
-loader = unittest.TestLoader()
-suite = loader.loadTestsFromTestCase(TestGameOfLife)
-runner = unittest.TextTestRunner(verbosity=2)
-result = runner.run(suite)
+
+
 
