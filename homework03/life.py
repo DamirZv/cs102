@@ -1,22 +1,21 @@
 import pathlib
 import random
 
-import typing as tp
+from typing import List, Optional, Tuple
+import copy
 from copy import deepcopy
 
-
-Cell = tp.Tuple[int, int]
-Cells = tp.List[int]
-Grid = tp.List[Cells]
+Cell = Tuple[int, int]
+Cells = List[int]
+Grid = List[Cells]
 
 
 class GameOfLife:
-    
     def __init__(
         self,
-        size: tp.Tuple[int, int],
+        size: Tuple[int, int],
         randomize: bool = True,
-        max_generations: tp.Optional[float] = float("inf"),
+        max_generations: Optional[float] = float("inf"),
     ) -> None:
         # Размер клеточного поля
         self.rows, self.cols = size
@@ -50,15 +49,15 @@ class GameOfLife:
 
     def get_next_generation(self) -> Grid:
         # Copy from previous assignment
-        new_grid = copy.deepcopy(self.grid)
+        new_grid = self.create_grid(False)
         for i in range(self.rows):
             for j in range(self.cols):
                 if (self.curr_generation[i][j] == 0) and sum(self.get_neighbours((i, j))) == 3:
                     new_grid[i][j] = 1
                 elif (self.curr_generation[i][j] == 1) and (
-                    sum(self.get_neighbours(i, j)) < 2 or sum(self.get_neighbours(i, j)) > 3
-                    ):
-                    new_grid[i][j] = 0
+                    1 < sum(self.get_neighbours((i, j))) < 4
+                ):
+                    new_grid[i][j] = 1
 
         return new_grid
 
@@ -69,7 +68,6 @@ class GameOfLife:
         self.prev_generation = copy.deepcopy(self.curr_generation)
         self.curr_generation = self.get_next_generation()
         self.generations += 1
-        
 
     @property
     def is_max_generations_exceeded(self) -> bool:
