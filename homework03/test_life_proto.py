@@ -2,14 +2,14 @@ import unittest
 import random
 import json
 import os
-
+from unittest.mock import MagicMock
 
 
 from life_proto import GameOfLife
 
 
 
-
+life_proto.pygame.display = MagicMock()
 
 class TestGameOfLife(unittest.TestCase):
 
