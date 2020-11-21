@@ -9,7 +9,7 @@ from life_proto import GameOfLife
 
 
 
-life_proto.pygame.display = MagicMock()
+life_proto.pygame.display = MagicMock() #type:ignore
 
 class TestGameOfLife(unittest.TestCase):
 
