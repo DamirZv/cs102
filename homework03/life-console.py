@@ -1,6 +1,5 @@
 import curses
 
-
 from life import GameOfLife
 from ui import UI
 
@@ -11,51 +10,51 @@ class Console(UI):
 
     def draw_borders(self, screen) -> None:
         """ Отобразить рамку. """
+
         screen.clear()
-        height, width = screen.getmaxyx()
-        string = ""
-        for row in range(height):
-            for col in range(width):
-                if row == 0 or row == (height - 1):
-                    if col == 0 or col == width:
-                        string += "+"
+        y, x = screen.getmaxyx()
+        doc = ""
+
+        for row in range(y):
+            for col in range(x):
+                if row == 0 or row == (y - 1):
+                    if col == 0 or col == x:
+                        doc += "*"
                     else:
-                        string += "-"
-                elif row < (height - 1) and row > 0:
-                    if col == 0 or col == (width - 1):
-                        string += "|"
+                        doc += "-"
+                elif row < (y - 1) and row > 0:
+                    if col == 0 or col == (x - 1):
+                        doc += "|"
                     else:
-                        string += " "
+                        doc += " "
             try:
-                screen.addstr(string)
+                screen.addstr(doc)
             except curses.error:
                 pass
-            string = ""
+            doc = ""
 
         self.draw_grid(screen)
-
         screen.refresh()
         screen.getch()
 
     def draw_grid(self, screen) -> None:
         """ Отобразить состояние клеток. """
-        height, width = screen.getmaxyx()
 
-        x = (width - self.life.cols) // 2
-        y = (height - self.life.rows) // 2
-
-        for сount_row, just_row in enumerate(self.life.curr_generation):
+        y, x = screen.getmaxyx()
+        col = (x - self.life.cols) // 2
+        row = (y - self.life.rows) // 2
+        for count_row, just_row in enumerate(self.life.curr_generation):
             for count_col, just_col in enumerate(just_row):
                 if just_col:
                     try:
-                        screen.addstr(count_row + y, count_col + x, "*")
+                        screen.addstr(count_row + row, count_col + col, "*")
                     except curses.error:
                         pass
 
     def run(self) -> None:
         screen = curses.initscr()
         curses.wrapper(self.draw_borders)
-        while self.life.is_max_generations_exceeded and not self.life.is_changing:
+        while not self.life.is_max_generations_exceeded and self.life.is_changing:
             self.life.step()
             self.draw_borders(screen)
         curses.endwin()
