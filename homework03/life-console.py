@@ -13,24 +13,24 @@ class Console(UI):
         """ Отобразить рамку. """
         screen.clear()
         height, width = screen.getmaxyx()
-        file = ""
+        string = ""
         for row in range(height):
             for col in range(width):
                 if row == 0 or row == (height - 1):
                     if col == 0 or col == width:
-                        file += "*"
+                        string += "+"
                     else:
-                        file += "-"
+                        string += "-"
                 elif row < (height - 1) and row > 0:
                     if col == 0 or col == (width - 1):
-                        file += "|"
+                        string += "|"
                     else:
-                        file += " "
+                        string += " "
             try:
-                screen.addstr(file)
+                screen.addstr(string)
             except curses.error:
                 pass
-            file = ""
+            string = ""
 
         self.draw_grid(screen)
 
@@ -41,21 +41,21 @@ class Console(UI):
         """ Отобразить состояние клеток. """
         height, width = screen.getmaxyx()
 
-        col = (width - self.life.cols) // 2
-        row = (height - self.life.rows) // 2
+        x = (width - self.life.cols) // 2
+        y = (height - self.life.rows) // 2
 
-        for n_row, row in enumerate(self.life.curr_generation):
-            for n_col, col in enumerate(row):
-                if col:
+        for сount_row, just_row in enumerate(self.life.curr_generation):
+            for count_col, just_col in enumerate(just_row):
+                if just_col:
                     try:
-                        screen.addstr(n_row + row, n_col + col, "*")
+                        screen.addstr(count_row + y, count_col + x, "*")
                     except curses.error:
                         pass
 
     def run(self) -> None:
         screen = curses.initscr()
         curses.wrapper(self.draw_borders)
-        while not self.life.is_max_generations_exceeded and self.life.is_changing:
+        while self.life.is_max_generations_exceeded and not self.life.is_changing:
             self.life.step()
             self.draw_borders(screen)
         curses.endwin()
