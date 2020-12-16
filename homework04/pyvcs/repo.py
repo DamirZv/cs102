@@ -14,6 +14,7 @@ def repo_find(workdir: tp.Union[str, pathlib.Path] = ".") -> pathlib.Path:
         return dir / gitdir
     raise Exception("Not a git repository")
 
+
 def repo_create(workdir: tp.Union[str, pathlib.Path]) -> pathlib.Path:
     gitdir = os.environ.get("GIT_DIR", default=".pyvcs")
     dir = pathlib.Path(workdir)
