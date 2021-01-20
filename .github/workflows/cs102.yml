@@ -16,6 +16,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install black mypy pylint  --only-binary pygame pygame==2.0.0.dev22 pyfakefs
         pip install -r homework05/requirements.txt
+    - name: Run isort
+      run: |
+        isort -c --diff --profile black ${{ github.head_ref }}
     - name: Run black
       run: |
         black -l 100 --check --diff --color --exclude "test*" ${{ github.head_ref }}
