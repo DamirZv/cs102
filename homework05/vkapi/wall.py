@@ -56,8 +56,11 @@ def get_posts_2500(
         "v": VK_CONFIG["version"],
     }
     response = session.post("execute", data=data)
-    doc = response.json()
-    if "error" in doc or not response.ok:
+    if response.ok:
+        doc = response.json()
+    else:
+        raise APIError("HTTPError")
+    if "error" in doc:
         raise APIError(doc["error"]["error_msg"])
     return doc["response"]["items"]
 
