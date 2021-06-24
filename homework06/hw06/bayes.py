@@ -1,7 +1,7 @@
 import typing as tp
 from collections import defaultdict
 from math import log
-from statistics import mean
+from statistics import mean 
 
 
 class NaiveBayesClassifier:
