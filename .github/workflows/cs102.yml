@@ -14,11 +14,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest black mypy pylint
+        pip install pytest black mypy pylint 
         pip install -r homework06/requirements.txt
-    - name: Run isort
-      run: |
-        isort -c --diff --profile black ${{ github.head_ref }}
     - name: Run black
       run: |
         black -l 100 --check --diff --color --exclude "test*" ${{ github.head_ref }} --strict --exclude "tests"
