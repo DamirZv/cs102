@@ -18,14 +18,13 @@ jobs:
         pip install -r homework06/requirements.txt
     - name: Run black
       run: |
-        black -l 100 --check --diff --color --exclude "test*" ${{ github.head_ref }} --strict --exclude "tests"
+        black -l 100 --check --diff --color --exclude "test*" ${{ github.head_ref }}
     - name: Run mypy
       run: |
-        mypy --ignore-missing-imports ${{ github.head_ref }}
+        mypy --ignore-missing-imports ${{ github.head_ref }} --strict --exclude "tests"
     - name: Run pylint
       run: |
         pylint --exit-zero ${{ github.head_ref }}
     - name: Run PyTest
       run: |
         pytest ${{ github.head_ref }}
-        
