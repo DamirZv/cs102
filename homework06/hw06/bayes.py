@@ -4,7 +4,8 @@ from math import log
 from statistics import mean
 
 
-class NaiveBayesClassifier:
+class NaiveBayesClassifier:\
+
     def __init__(self, a: float = 1e-5) -> None:
         self.d = 0
         self.words_counter: tp.Dict[str, int] = defaultdict(int)
@@ -13,10 +14,9 @@ class NaiveBayesClassifier:
         self.a = a
 
     def fit(self, X: tp.List[str], y: tp.List[str]) -> None:
-        
-        """Fit Naive Bayes classifier according to X, y."""
 
-        for xi, yi in zip(X, y):
+        """Fit Naive Bayes classifier according to X, y."""
+         for xi, yi in zip(X, y):
             self.classes[yi] += 1
             for word in xi.split():
                 self.words_counter[word] += 1
