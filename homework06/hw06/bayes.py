@@ -13,6 +13,7 @@ class NaiveBayesClassifier:
         self.a = a
 
     def fit(self, X: tp.List[str], y: tp.List[str]) -> None:
+        
         """Fit Naive Bayes classifier according to X, y."""
 
         for xi, yi in zip(X, y):
@@ -50,4 +51,3 @@ class NaiveBayesClassifier:
         """Returns the mean accuracy on the given test data and labels."""
         predicted = self.get_predictions(X)
         return mean(pred == actual for pred, actual in zip(predicted, y))
-        
