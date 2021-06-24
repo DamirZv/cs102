@@ -6,7 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 
-from scraputils import get_news
+from hw06.scraputils import get_news
 
 Base = declarative_base()
 path_news_db = "sqlite:///news.db"

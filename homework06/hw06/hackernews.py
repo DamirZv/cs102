@@ -6,8 +6,8 @@ from bottle import redirect, request, route, run, template
 from sqlalchemy.orm import session
 from sqlalchemy.sql.expression import label
 
-from bayes import NaiveBayesClassifier
-from db import News, change_label, engine, get_new_news, get_session
+from hw06.bayes import NaiveBayesClassifier
+from hw06.db import News, change_label, engine, get_new_news, get_session
 
 
 @tp.no_type_check
