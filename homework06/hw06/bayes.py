@@ -14,7 +14,6 @@ class NaiveBayesClassifier:
         self.a = a
 
     def fit(self, X: tp.List[str], y: tp.List[str]) -> None:
-        """Fit Naive Bayes classifier according to X, y.""" #type: ignore
         for xi, yi in zip(X, y):
             self.classes[yi] += 1
             for word in xi.split():
@@ -38,7 +37,6 @@ class NaiveBayesClassifier:
         return log(self.classes[cls]) + sum(self.log_wi_c(cls, w) for w in feature.split())
 
     def predict(self, feature: str) -> str:
-        """Perform classification on an array of test vectors X.""" #type: ignore
         assert len(self.classes) > 0
         return str(max(self.classes.keys(), key=lambda c: self.class_probability(c, feature)))
 
@@ -47,6 +45,5 @@ class NaiveBayesClassifier:
         return [self.predict(feature) for feature in X]
 
     def score(self, X: tp.List[str], y: tp.List[str]) -> float:
-        """Returns the mean accuracy on the given test data and labels.""" #type: ignore
         predicted = self.get_predictions(X)
         return mean(pred == actual for pred, actual in zip(predicted, y))
