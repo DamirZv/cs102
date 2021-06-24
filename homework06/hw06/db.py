@@ -65,3 +65,4 @@ if __name__ == "__main__":
     make_table_news(
         get_session(engine), get_news(url="https://news.ycombinator.com/newest", n_pages=4)
     )
+    

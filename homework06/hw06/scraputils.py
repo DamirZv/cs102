@@ -75,6 +75,7 @@ def get_news(url: str, n_pages: int = 1) -> tp.List[tp.Dict[str, tp.Union[int, s
         n_pages -= 1
     return news
 
+
 if __name__ == "__main__":
     n = get_news(url="https://news.ycombinator.com/newest/", n_pages=4)
     print(len(n))
