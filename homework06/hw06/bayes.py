@@ -13,7 +13,6 @@ class NaiveBayesClassifier:
         self.a = a
 
     def fit(self, X: tp.List[str], y: tp.List[str]) -> None:
-
         """Fit Naive Bayes classifier according to X, y."""
         for xi, yi in zip(X, y):
             self.classes[yi] += 1
