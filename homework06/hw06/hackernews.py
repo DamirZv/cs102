@@ -1,13 +1,14 @@
 import re
 import string
-from bottle import route, run, template, request, redirect # type: ignore
-from sqlalchemy.orm import session # type: ignore
+from bottle import route, run, template, request, redirect
+from sqlalchemy.orm import session
 import typing as tp
 
-from sqlalchemy.sql.expression import label # type: ignore
+from sqlalchemy.sql.expression import label
 
-from db import News, get_session, engine, change_label, get_new_news
-from bayes import NaiveBayesClassifier
+from hw06.database import News, get_session, engine, change_label, get_new_news
+from hw06.bayes import NaiveBayesClassifier
+
 
 @tp.no_type_check
 @route("/")
@@ -28,11 +29,10 @@ def add_label():
     redirect("/news")
 
 
-
 @tp.no_type_check
 @route("/update")
 def update_news():
-    s = get_session(engine) # type: ignore
+    s = get_session(engine)
     get_new_news(s)
     redirect("/news")
 
@@ -48,16 +48,3 @@ def classify_news():
     train_set = s.query(News).filter(News.label != None).all()
     model.fit([clean(news.title).lower() for news in train_set], [news.label for news in train_set])
     test = s.query(News).filter(News.label == None).all()
-    cell = list(map(lambda x: model.predict(x.title), test))
-    return template(
-        "color_template", rows=list(map(lambda x: (x[1], colors[cell[x[0]]]), enumerate(test)))
-    )
-
-
-def clean(s: str) -> str:
-    translator = str.maketrans("", "", string.punctuation)
-    return s.translate(translator)
-
-
-if __name__ == "__main__":
-    run(host="localhost", port=8080)
