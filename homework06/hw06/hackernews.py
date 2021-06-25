@@ -1,13 +1,13 @@
 import re
 import string
-from bottle import route, run, template, request, redirect
-from sqlalchemy.orm import session
+from bottle import route, run, template, request, redirect # type: ignore
+from sqlalchemy.orm import session # type: ignore
 import typing as tp
 
-from sqlalchemy.sql.expression import label
+from sqlalchemy.sql.expression import label # type: ignore
 
-from hw06.database import News, get_session, engine, change_label, get_new_news
-from hw06.bayes import NaiveBayesClassifier
+from db import News, get_session, engine, change_label, get_new_news
+from bayes import NaiveBayesClassifier
 
 
 @tp.no_type_check
