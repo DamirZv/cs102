@@ -32,7 +32,7 @@ def add_label():
 @tp.no_type_check
 @route("/update")
 def update_news():
-    s = get_session(engine)
+    s = get_session(engine) # type: ignore
     get_new_news(s)
     redirect("/news")
 
