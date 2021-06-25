@@ -36,4 +36,3 @@ class WSGIRequest(HTTPRequest):
             environ[f"HTTP_{header.decode().upper()}"] = self.headers[header].decode()
 
         return environ
-    
