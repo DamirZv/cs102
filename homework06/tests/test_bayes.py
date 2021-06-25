@@ -1,7 +1,7 @@
 import csv
 import pathlib
 
-import bayes, hackernews
+from hw06 import bayes, hackernews
 
 
 def test_classification_single_words() -> None:
