@@ -28,6 +28,7 @@ def add_label():
     redirect("/news")
 
 
+
 @tp.no_type_check
 @route("/update")
 def update_news():
