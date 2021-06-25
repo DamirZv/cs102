@@ -1,12 +1,12 @@
 import typing as tp
 
-from sqlalchemy import Column, Integer, String, create_engine
-from sqlalchemy.engine.base import Engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm.session import Session
+from sqlalchemy import Column, Integer, String, create_engine # type: ignore
+from sqlalchemy.engine.base import Engine # type: ignore
+from sqlalchemy.ext.declarative import declarative_base # type: ignore
+from sqlalchemy.orm import sessionmaker # type: ignore
+from sqlalchemy.orm.session import Session # type: ignore
 
-from hw06.scraputils import get_news
+from scraputils import get_news # type: ignore
 
 Base = declarative_base()
 path_news_db = "sqlite:///news.db"
