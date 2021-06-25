@@ -102,4 +102,3 @@ if __name__ == "__main__":
         request_handler_cls=StaticHTTPRequestHandler,
     )
     server.serve_forever()
-    
