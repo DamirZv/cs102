@@ -1,4 +1,4 @@
-nname: CS102 Workflow
+name: CS102 Workflow
 on: [pull_request]
 jobs:
   build:
