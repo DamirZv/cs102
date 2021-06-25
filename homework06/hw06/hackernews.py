@@ -1,14 +1,13 @@
 import re
 import string
+from bottle import route, run, template, request, redirect
+from sqlalchemy.orm import session
 import typing as tp
 
-from bottle import redirect, request, route, run, template
-from sqlalchemy.orm import session
 from sqlalchemy.sql.expression import label
 
+from hw06.database import News, get_session, engine, change_label, get_new_news
 from hw06.bayes import NaiveBayesClassifier
-from hw06.db import News, change_label, engine, get_new_news, get_session
-
 
 @tp.no_type_check
 @route("/")
