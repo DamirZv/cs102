@@ -20,3 +20,4 @@ class HTTPResponse:
             )
             + f"\r\n\r\n{self.body.decode()}"
         ).encode()
+        

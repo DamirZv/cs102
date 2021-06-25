@@ -120,3 +120,4 @@ class BaseHTTPRequestHandler(BaseRequestHandler):
 
     def on_message_complete(self) -> None:
         self._parsed = True
+        
