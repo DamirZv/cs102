@@ -25,4 +25,4 @@ jobs:
         pylint --exit-zero ${{ github.head_ref }}
     - name: Run PyTest
       run: |
-        pytest ${{ github.head_ref }}
+        pytest ${{ github.head_ref }} --exclude "tests"
