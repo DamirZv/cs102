@@ -1,7 +1,5 @@
 name: CS102 Workflow
-
 on: [pull_request]
-
 jobs:
   build:
     runs-on: ubuntu-latest
